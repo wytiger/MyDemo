@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".GlobalActivity"
+            android:name=".test.context.GlobalActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:taskAffinity=":global"
@@ -20,9 +20,46 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".test.context.ContextTestActivity"></activity>
+        <activity
+            android:name=".UnclickGrayActivity"
+            android:label="@string/title_activity_gray_unclickable" >
         </activity>
+        <activity
+            android:name=".test.screen.WindowDemoActivity"
+            android:label="WindowTest" >
+        </activity>
+        <activity
+            android:name=".test.zoom.SurfaceZoomActivity"
+            android:label="WindowSwitchTest" >
+        </activity>
+        <activity
+            android:name=".test.zoom.ZoomActivity"
+            android:label="@string/title_activity_zoom" >
+        </activity>
+        <activity
+            android:name=".test.zoom.ZoomActivity2"
+            android:label="@string/title_activity_zoom" >
+        </activity>
+        <activity
+            android:name=".test.permission.CheckPermissionActivity"
+            android:label="@string/title_activity_check_permission" >
+        </activity>
+        <activity
+            android:name=".WakeLockActivity"
+            android:label="@string/title_activity_wake_lock" >
+        </activity>
+        <activity
+            android:name=".test.screen.SystemUIActivity"
+            android:label="@string/title_activity_system_ui" >
+        </activity>
+        <activity
+            android:name=".test.screen.ScreenActivity"
+            android:label="activity_screen" >
+        </activity>
+
+
     </application>
 
 </manifest>

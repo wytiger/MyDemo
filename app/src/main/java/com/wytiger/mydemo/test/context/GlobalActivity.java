@@ -1,9 +1,12 @@
-package com.wytiger.mydemo;
+package com.wytiger.mydemo.test.context;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.wytiger.mydemo.MainActivity;
+import com.wytiger.mydemo.R;
 
 /**
  * 需要设置透明主题

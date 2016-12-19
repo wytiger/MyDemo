@@ -1,52 +1,75 @@
 package com.wytiger.mydemo;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.View;
+import android.view.View.OnClickListener;
 
-public class MainActivity extends AppCompatActivity {
+import com.wytiger.mydemo.test.permission.CheckPermissionActivity;
+import com.wytiger.mydemo.test.screen.ScreenActivity;
+import com.wytiger.mydemo.test.screen.SystemUIActivity;
+import com.wytiger.mydemo.test.screen.WindowDemoActivity;
+import com.wytiger.mydemo.test.zoom.SurfaceZoomActivity;
+import com.wytiger.mydemo.test.zoom.ZoomActivity;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        LinearLayout activity_main = (LinearLayout) findViewById(R.id.activity_main);
-        TextView tvText = new TextView(GlobalActivity.instance);
-        tvText.setText("我的context是一个独立的activity提供的");
-        activity_main.addView(tvText);
+public class MainActivity extends Activity implements OnClickListener {
+	private static String TAG = "MyDemo";
 
-        showDialog();
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
 
-    private void showDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("普通对话框的标题");
-        builder.setMessage("这是一个普通对话框的内容");
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, "取消", Toast.LENGTH_LONG).show();
-            }
-        });
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(MainActivity.this, "确定", Toast.LENGTH_LONG).show();
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
+		findViewById(R.id.btnGrayUnckickable).setOnClickListener(this);
+		findViewById(R.id.btnWindow).setOnClickListener(this);
+		findViewById(R.id.btnSurfaceZoom).setOnClickListener(this);
+		findViewById(R.id.btnZoom).setOnClickListener(this);
+		findViewById(R.id.btnCheckPermission).setOnClickListener(this);
+		findViewById(R.id.btnSystemUI).setOnClickListener(this);
+		findViewById(R.id.btnScreen).setOnClickListener(this);
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //销毁
-        GlobalActivity.instance.finish();
-    }
+
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.btnGrayUnckickable:
+			startActivity(new Intent(MainActivity.this, UnclickGrayActivity.class));
+			break;
+			
+		case R.id.btnWindow:
+			startActivity(new Intent(MainActivity.this, WindowDemoActivity.class));
+			break;
+			
+		case R.id.btnSurfaceZoom:
+			startActivity(new Intent(MainActivity.this, SurfaceZoomActivity.class));
+			break;
+
+		case R.id.btnZoom:
+			startActivity(new Intent(MainActivity.this, ZoomActivity.class));
+			break;
+
+		case R.id.btnCheckPermission:
+			startActivity(new Intent(MainActivity.this, CheckPermissionActivity.class));
+			break;
+			
+
+			
+		case R.id.btnSystemUI:
+			startActivity(new Intent(MainActivity.this, SystemUIActivity.class));
+			break;
+			
+		case R.id.btnScreen:
+			startActivity(new Intent(this, ScreenActivity.class));
+			break;
+			
+		default:
+			break;
+		}
+
+	}
+
 }
