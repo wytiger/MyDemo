@@ -15,8 +15,8 @@ import java.io.InputStream;
  */
 
 public class RawDbUtil {
-    private static String sdpath = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/mydatabase";//sdpath用于存放保存的路径。
-    private static String filename = "test.db";//filename用于保存文件名。
+    private static String dbDirPath = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/mydatabase";//sdpath用于存放保存的路径。
+    private static String dbFileName = "test.db";//filename用于保存文件名。
 
 
     public static SQLiteDatabase openDatabase(Context context, int rawId) {
@@ -27,16 +27,18 @@ public class RawDbUtil {
 
     @NonNull
     private static File copy(Context context, int rawId) {
-        File dir = new File(sdpath);
+        File dir = new File(dbDirPath);
+        //如果该目录不存在，创建该目录
         if (!dir.exists()) {
             dir.mkdir();
-        }//如果该目录不存在，创建该目录
-        String databasefilename = sdpath + "/" + filename;//其值等于database的路径
-        File filepath = new File(databasefilename);
-        if (!filepath.exists()) {//如果文件不存在
+        }
+        String dbFilePath = dbDirPath + "/" + dbFileName;//其值等于database的路径
+        File filepath = new File(dbFilePath);
+        //如果文件不存在,写入文件
+        if (!filepath.exists()) {
             try {
                 InputStream inputStream = context.getResources().openRawResource(rawId);//将raw中的test.db放入输入流中
-                FileOutputStream fileOutputStream = new FileOutputStream(databasefilename);//将新的文件放入输出流中
+                FileOutputStream fileOutputStream = new FileOutputStream(dbFilePath);//将新的文件放入输出流中
                 byte[] buff = new byte[8192];
                 int len = 0;
                 while ((len = inputStream.read(buff)) > 0) {
@@ -48,7 +50,7 @@ public class RawDbUtil {
                 Log.i("RawDbUtil", "复制数据库失败");
                 e.printStackTrace();
             }
-        }//写入文件结束
+        }
         Log.i("RawDbUtil", "filepath = " + filepath);
         return filepath;
     }

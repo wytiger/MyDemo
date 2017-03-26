@@ -19,11 +19,6 @@ import com.wytiger.mydemo.test.zoom.SurfaceZoomActivity;
 import com.wytiger.mydemo.test.zoom.ZoomActivity;
 import com.wytiger.mydemo.utils.RawDbUtil;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 
 public class MainActivity extends Activity implements OnClickListener {
     private static String TAG = "MyDemo";
@@ -36,56 +31,17 @@ public class MainActivity extends Activity implements OnClickListener {
         initView();
 
         testPicasso();
-
-
-        SQLiteDatabase db = RawDbUtil.openDatabase(this,R.raw.mytest);
-       query(db);
+        testReadRawDb();
     }
 
-    private void query(SQLiteDatabase db) {
+    private void testReadRawDb() {
+        SQLiteDatabase db = RawDbUtil.openDatabase(this, R.raw.mytest);
         Cursor cursor = db.query("student", null, null, null, null, null, null);
         while (cursor.moveToNext()) {
             Log.i("TAG", cursor.getString(cursor.getColumnIndex("name")));
         }
     }
 
-
-    private void copyRawToInternalStorage(int rawResId, String dbPath) {
-        InputStream is = null;
-        FileOutputStream fos = null;
-        try {
-            File dbFile = new File(dbPath, "mytest.db");
-            if (!dbFile.exists()) {
-               boolean mkdirs =  dbFile.mkdirs();
-                Log.i("TAG", "mkdirs = " + mkdirs);
-            }
-            is = this.getResources().openRawResource(rawResId); // 你Raw的那个db索引
-            fos = new FileOutputStream(dbPath);
-            byte[] buffer = new byte[1024];
-            int count = 0;
-            while ((count = is.read(buffer)) > 0) {
-                fos.write(buffer, 0, count);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("TAG", "数据库复制失败");
-        } finally {
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (fos != null) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
     private void initView() {
         findViewById(R.id.btnGrayUnckickable).setOnClickListener(this);
