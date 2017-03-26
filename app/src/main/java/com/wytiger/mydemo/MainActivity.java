@@ -19,6 +19,8 @@ import com.wytiger.mydemo.test.zoom.SurfaceZoomActivity;
 import com.wytiger.mydemo.test.zoom.ZoomActivity;
 import com.wytiger.mydemo.utils.RawDbUtil;
 
+import java.io.File;
+
 
 public class MainActivity extends Activity implements OnClickListener {
     private static String TAG = "MyDemo";
@@ -35,7 +37,8 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     private void testReadRawDb() {
-        SQLiteDatabase db = RawDbUtil.openDatabase(this, R.raw.mytest);
+        File file = RawDbUtil.copy(this,R.raw.mytest,RawDbUtil.dbDirPath,RawDbUtil.dbFileName);
+        SQLiteDatabase db = RawDbUtil.openDatabase(file);
         Cursor cursor = db.query("student", null, null, null, null, null, null);
         while (cursor.moveToNext()) {
             Log.i("TAG", cursor.getString(cursor.getColumnIndex("name")));
