@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wytiger.mydemo">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
     <application
         android:allowBackup="true"
@@ -18,52 +18,57 @@
             android:screenOrientation="portrait"
             android:taskAffinity=":global"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
+
+        </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".test.context.ContextTestActivity" />
+        <activity
+            android:name=".UnclickGrayActivity"
+            android:label="@string/title_activity_gray_unclickable" />
+        <activity
+            android:name=".test.screen.WindowDemoActivity"
+            android:label="WindowTest" />
+        <activity
+            android:name=".test.zoom.SurfaceZoomActivity"
+            android:label="WindowSwitchTest" />
+        <activity
+            android:name=".test.zoom.ZoomActivity"
+            android:label="@string/title_activity_zoom" />
+        <activity
+            android:name=".test.zoom.ZoomActivity2"
+            android:label="@string/title_activity_zoom" />
+        <activity
+            android:name=".test.permission.CheckPermissionActivity"
+            android:label="@string/title_activity_check_permission" />
+        <activity
+            android:name=".WakeLockActivity"
+            android:label="@string/title_activity_wake_lock" />
+        <activity
+            android:name=".test.screen.SystemUIActivity"
+            android:label="@string/title_activity_system_ui" />
+        <activity
+            android:name=".test.screen.ScreenActivity"
+            android:label="activity_screen" />
+        <activity android:name=".butterknife.ButterKnifeActivity" />
+
+        <!-- 守护进程 -->
+        <service
+            android:name=".dameon.LocalService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".dameon.RemoteService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":RemoteProcess" />
+
+        <activity android:name=".dameon.DaemonProcessActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".test.context.ContextTestActivity"></activity>
-        <activity
-            android:name=".UnclickGrayActivity"
-            android:label="@string/title_activity_gray_unclickable" >
-        </activity>
-        <activity
-            android:name=".test.screen.WindowDemoActivity"
-            android:label="WindowTest" >
-        </activity>
-        <activity
-            android:name=".test.zoom.SurfaceZoomActivity"
-            android:label="WindowSwitchTest" >
-        </activity>
-        <activity
-            android:name=".test.zoom.ZoomActivity"
-            android:label="@string/title_activity_zoom" >
-        </activity>
-        <activity
-            android:name=".test.zoom.ZoomActivity2"
-            android:label="@string/title_activity_zoom" >
-        </activity>
-        <activity
-            android:name=".test.permission.CheckPermissionActivity"
-            android:label="@string/title_activity_check_permission" >
-        </activity>
-        <activity
-            android:name=".WakeLockActivity"
-            android:label="@string/title_activity_wake_lock" >
-        </activity>
-        <activity
-            android:name=".test.screen.SystemUIActivity"
-            android:label="@string/title_activity_system_ui" >
-        </activity>
-        <activity
-            android:name=".test.screen.ScreenActivity"
-            android:label="activity_screen" >
-        </activity>
-
-
     </application>
 
 </manifest>
